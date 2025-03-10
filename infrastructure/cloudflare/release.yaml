@@ -1,0 +1,35 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: cloudflare-tunnel
+  namespace: cloudflare
+spec:
+  releaseName: cloudflare
+  chart:
+    spec:
+      chart: cloudflare-tunnel
+      version: "0.5.0"
+      sourceRef:
+        kind: HelmRepository
+        name: cloudflare
+        namespace: flux-system
+  interval: 1h
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  values:
+    cloudflare:
+      tunnelName: ${TUNNEL_NAME}
+      tunnelId: ${TUNNEL_ID}
+      secretName: "tunnel-credentials"
+      ingress:
+        - hostname: "*.${DOMAIN}"
+          service: "https://ingress-nginx-controller.kube-system.svc.cluster.local:443"
+          originRequest:
+            noTLSVerify: true
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+    replicaCount: 1
