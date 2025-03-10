@@ -13,7 +13,7 @@ fi
 CLUSTER_NAME=$1
 GITHUB_USER=$2
 FLUX_NAMESPACE="flux-system"
-REPO_NAME="flux-gitops-repo"
+REPO_NAME="gitops-test"
 
 # Ensure prerequisites are installed
 command -v flux >/dev/null 2>&1 || { echo "flux CLI is required. Install from https://fluxcd.io/flux/installation/"; exit 1; }
