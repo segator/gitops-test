@@ -20,8 +20,8 @@ spec:
       retries: 3
   values:
     cloudflare:
-      tunnelName: ${TUNNEL_NAME}
-      tunnelId: ${TUNNEL_ID}
+      tunnelName: ${CLOUDFLARE_TUNNEL_NAME}
+      tunnelId: ${CLOUDFLARE_TUNNEL_ID}
       secretName: "tunnel-credentials"
       ingress:
         - hostname: "*.${DOMAIN}"

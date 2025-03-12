@@ -1,0 +1,46 @@
+keys:
+  - &cluster_demo-lab age1rjtye6ftdnlhakmwaly8twan58dcw64mmenm9ap2lteyhux3692su66802
+  - &user_aymerici age1qw932v4nt3muyy7lf6f2k68627huql68duzqvq7qq0tljr37cp6sjq07f9
+
+creation_rules:
+
+- path_regex: clusters/demo-lab/.*-secrets.yaml
+  encrypted_regex: ^(data|stringData|key|token|secretboxEncryptionSecret|secret)$
+  key_groups:
+  - age:
+    - *user_aymerici
+    - *cluster_demo-lab
+
+
+#
+#
+#
+#---
+#apiVersion: kustomize.toolkit.fluxcd.io/v1
+#kind: Kustomization
+#metadata:
+#  name: sops-encrypted
+#  namespace: default
+#spec:
+#  interval: 5m
+#  path: "./"
+#  sourceRef:
+#    kind: GitRepository
+#    name: repository-with-secrets
+#  decryption:
+#    provider: sops
+#    secretRef:
+#      name: sops-keys
+#
+#
+#---
+#apiVersion: v1
+#kind: Secret
+#metadata:
+#  name: sops-keys
+#  namespace: default
+#data:
+#  # Exemplary age private key
+#  identity.agekey: <BASE64>
+#  # Exemplary Hashicorp Vault token
+#  sops.vault-token: <BASE64>

@@ -22,3 +22,5 @@ This repository contains Kubernetes manifests and Helm releases managed by FluxC
 
 ```bash
 ./bootstrap.sh demo-lab your-github-username
+
+```

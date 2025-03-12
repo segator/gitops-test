@@ -1,8 +1,8 @@
 # Define variables
 flux_version := "2.0.1"
 repo_name := "gitops-test"
-age_key_dir := "~/.config/secrets"
-age_key_path := "{{age_key_dir}}/age.key"
+age_key_dir := "$HOME/.config/secrets"
+age_key_path := "$HOME/.config/secrets/age.key"
 
 # List available commands
 default:
@@ -13,27 +13,49 @@ bootstrap cluster_name github_user:
     @echo "Bootstrapping cluster {{cluster_name}}..."
     ./bootstrap.sh {{cluster_name}} {{github_user}}
 
-# Generate an Age key if it doesn't exist
-generate-age-key:
-    @mkdir -p {{age_key_dir}}
-    @if [ ! -f {{age_key_path}} ]; then \
-        echo "Age key not found, generating a new one..."; \
-        age-keygen -o {{age_key_path}}; \
-        echo "Your new age public key: $(grep "public key" {{age_key_path}} | awk '{print $4}')"
+# Generate a cluster age key and install it into the cluster
+generate-cluster-key cluster_name:
+    #!/usr/bin/env bash
+    cluster_key="{{age_key_dir}}/{{cluster_name}}.key"
+
+    mkdir -p "{{age_key_dir}}"
+
+
+    if [ ! -f "${cluster_key}" ]; then
+        echo "Age key ${cluster_key} not found, generating a new one..."
+        age-keygen -o "${cluster_key}"
     fi
 
+    # Get public key
+    age_pub_key=$(grep "public key" "${cluster_key}" | awk '{print $4}')
 
-# Set up Flux to use SOPS for secret decryption
-setup-flux-sops:
-    @echo "Setting up Flux SOPS integration..."
-    kubectl -n flux-system create secret generic sops-age \
-        --from-file=age.agekey={{age_key_path}}
+    if kubectl get secret flux-sops-agekey --namespace flux-system > /dev/null 2>&1; then
+        echo "Secret flux-sops-agekey already exists. Recreating it..."
+        kubectl delete secret flux-sops-agekey --namespace flux-system
+    fi
 
-# Encrypt a Kubernetes secret
-encrypt-secret file:
-    @echo "Encrypting {{file}} with SOPS..."
-    sops --encrypt --in-place {{file}}
+    # Create Kubernetes secret
+    kubectl create secret generic flux-sops-agekey \
+        --namespace flux-system \
+        --from-literal=flux-sops.agekey="$(cat ${cluster_key})"
 
+    echo "Your age public key: ${age_pub_key} has been installed into the cluster"
+    echo "Remember to update your .sops.yaml file with this key and execute just update-keys"
+
+# Update SOPS keys in all clusters
+update-keys:
+    @sops updatekeys clusters/*/*-secrets.yaml
+## Set up Flux to use SOPS for secret decryption
+#setup-flux-sops:
+#    @echo "Setting up Flux SOPS integration..."
+#    kubectl -n flux-system create secret generic sops-age \
+#        --from-file=age.agekey={{age_key_path}}
+#
+## Encrypt a Kubernetes secret
+#encrypt-secret file:
+#    @echo "Encrypting {{file}} with SOPS..."
+#    sops --encrypt --in-place {{file}}
+#
 
 #
 ## Create Cloudflare tunnel secret interactively

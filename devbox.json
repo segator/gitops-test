@@ -16,11 +16,10 @@
   "shell": {
     "init_hook": [
       "echo 'DevBox environment for FluxCD GitOps initialized!'",
-      "if [ ! -f ~/.config/secrets/age.key ]; then echo 'Age key not found, generating a new one...'; just generate-age-key; fi",
-      "echo 'Your age public key:'; cat ~/.config/secrets/age.key | grep public | awk '{print $4}'"
+      "if [ ! -f ~/.secrets/nix/age_user_key.txt ]; then echo 'Age key not found!';fi"
     ]
   },
   "env": {
-    "SOPS_AGE_KEY_FILE": "~/.config/secrets/age.key"
+    "SOPS_AGE_KEY_FILE": "$HOME/.secrets/nix/age_user_key.txt"
   }
 }
