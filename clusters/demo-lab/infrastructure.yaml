@@ -10,7 +10,7 @@ spec:
     name: flux-system
   path: ./infrastructure
   resources:
-    - cloudflare-secrets.yaml
+    - secrets/cloudflare-secrets.yaml
   prune: true
   timeout: 5m
   wait: true

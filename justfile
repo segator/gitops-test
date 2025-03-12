@@ -11,36 +11,12 @@ default:
 # Create a new cluster with FluxCD
 bootstrap cluster_name github_user:
     @echo "Bootstrapping cluster {{cluster_name}}..."
-    ./bootstrap.sh {{cluster_name}} {{github_user}}
+    ./scripts/bootstrap.sh {{cluster_name}} {{github_user}}
 
 # Generate a cluster age key and install it into the cluster
 generate-cluster-key cluster_name:
     #!/usr/bin/env bash
-    cluster_key="{{age_key_dir}}/{{cluster_name}}.key"
-
-    mkdir -p "{{age_key_dir}}"
-
-
-    if [ ! -f "${cluster_key}" ]; then
-        echo "Age key ${cluster_key} not found, generating a new one..."
-        age-keygen -o "${cluster_key}"
-    fi
-
-    # Get public key
-    age_pub_key=$(grep "public key" "${cluster_key}" | awk '{print $4}')
-
-    if kubectl get secret flux-sops-agekey --namespace flux-system > /dev/null 2>&1; then
-        echo "Secret flux-sops-agekey already exists. Recreating it..."
-        kubectl delete secret flux-sops-agekey --namespace flux-system
-    fi
-
-    # Create Kubernetes secret
-    kubectl create secret generic flux-sops-agekey \
-        --namespace flux-system \
-        --from-literal=flux-sops.agekey="$(cat ${cluster_key})"
-
-    echo "Your age public key: ${age_pub_key} has been installed into the cluster"
-    echo "Remember to update your .sops.yaml file with this key and execute just update-keys"
+    ./scripts/generate-cluster-key.sh {{cluster_name}} {{age_key_dir}}
 
 # Update SOPS keys in all clusters
 update-keys:

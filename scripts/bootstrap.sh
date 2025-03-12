@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
 # Usage: ./bootstrap.sh <cluster-name> <github-username>
