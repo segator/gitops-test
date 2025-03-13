@@ -4,13 +4,13 @@ metadata:
   name: infrastructure
   namespace: flux-system
 spec:
-  interval: 1h
+  interval: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system
   dependsOn:
     - name: secrets
-  path: ./infrastructure
+  path: ./clusters/demo-lab/infrastructure
   prune: true
   timeout: 5m
   wait: true
