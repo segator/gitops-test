@@ -22,4 +22,3 @@ spec:
     substitute:
       CLOUDFLARE_TUNNEL_NAME: "demo-lab"
       CLOUDFLARE_TUNNEL_ID: "tunnel-id"
----
