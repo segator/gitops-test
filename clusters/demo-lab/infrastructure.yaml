@@ -18,7 +18,7 @@ spec:
     provider: sops
     secretRef:
       name: flux-sops-agekey
-  postbuild:
+  postBuild:
     substitute:
       CLOUDFLARE_TUNNEL_NAME: "demo-lab"
       CLOUDFLARE_TUNNEL_ID: "tunnel-id"
