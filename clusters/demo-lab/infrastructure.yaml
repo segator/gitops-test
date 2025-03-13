@@ -10,11 +10,11 @@ spec:
     name: flux-system
   dependsOn:
     - name: secrets
-  path: ./clusters/demo-lab/infrastructure
+  path: ./infrastructure
   prune: true
   timeout: 5m
   wait: true
   postBuild:
-    substitute:
+    substituteFrfomConfigMap:
       CLOUDFLARE_TUNNEL_NAME: "demo-lab"
       CLOUDFLARE_TUNNEL_ID: "tunnel-id"
