@@ -4,6 +4,8 @@ resources:
   - flux-system
   - secrets/cluster-secrets.yaml
   - ../base
+generatorOptions:
+  disableNameSuffixHash: true
 configMapGenerator:
   - name: cluster-config
     namespace: flux-system
