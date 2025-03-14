@@ -4,8 +4,9 @@ resources:
 - namespace.yaml
 - release.yaml
 - repository.yaml
-
 namespace: cloudflare
+generatorOptions:
+  disableNameSuffixHash: true
 secretGenerator:
   - name: tunnel-credentials
     literals:
