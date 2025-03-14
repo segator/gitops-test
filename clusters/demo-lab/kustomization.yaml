@@ -8,16 +8,7 @@ patches:
       kind: Kustomization
       name: flux-system
     patch: |-
-      apiVersion: kustomize.toolkit.fluxcd.io/v1
-      kind: Kustomization
-      metadata:
-        name: flux-system
-        namespace: flux-system
-      spec:
-        decryption:
-          provider: sops
-          secretRef:
-            name: flux-sops-agekey
+
 #  - flux-system
 #  - ../base
 #create a patch from cluster-secrets.yaml where you replace the path to my cluster folder secrets.yaml please
