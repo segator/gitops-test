@@ -1,8 +1,18 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-#- infrastructure.yaml
-- secrets.yaml
-- ../infrastructure
-
+  - flux-system
+  - ../base
+#create a patch from cluster-secrets.yaml where you replace the path to my cluster folder secrets.yaml please
 patches:
+  - target:
+      kind: Kustomization
+      name: cluster-secrets
+    patch: |-
+      apiVersion: kustomize.toolkit.fluxcd.io/v1
+      kind: Kustomization
+      metadata:
+        name: cluster-secrets
+        namespace: flux-system
+      spec:
+        path: ./secrets.yaml

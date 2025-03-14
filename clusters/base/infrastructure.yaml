@@ -4,9 +4,20 @@ metadata:
   name: infrastructure
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./infrastructure/base
+  dependsOn:
+    - name: secrets
+  path: ./infrastructure
   prune: true
+  timeout: 5m
+  wait: true
+#  postBuild:
+#    substituteFrom:
+#      - kind:  ConfigMap
+#        name:
+#    substitute:
+#      CLOUDFLARE_TUNNEL_NAME: "demo-lab"
+#      CLOUDFLARE_TUNNEL_ID: "tunnel-id"
