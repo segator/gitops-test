@@ -9,4 +9,4 @@ namespace: cloudflare
 secretGenerator:
   - name: tunnel-credentials
     literals:
-      - credentials.json=${cloudflare_credentials.json}
+      - credentials.json=${cloudflare_credentials_json}
