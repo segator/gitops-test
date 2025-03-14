@@ -15,4 +15,4 @@ patches:
         name: cluster-secrets
         namespace: flux-system
       spec:
-        path: ./secrets.yaml
+        path: ../demo-lab/secrets.yaml
