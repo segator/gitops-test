@@ -9,12 +9,18 @@ spec:
     kind: GitRepository
     name: flux-system
   dependsOn:
-    - name: secrets
+    - name: flux-system
   path: ./infrastructure
   prune: true
   timeout: 5m
   wait: true
   postBuild:
-    substitute:
-      CLOUDFLARE_TUNNEL_NAME: "demo-lab"
-      CLOUDFLARE_TUNNEL_ID: "tunnel-id"
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-config
+        optional: false
+      - kind: Secret
+        name: cluster-secrets
+        optional: false
+
+
