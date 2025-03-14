@@ -4,3 +4,9 @@ resources:
 - namespace.yaml
 - release.yaml
 - repository.yaml
+
+namespace: cloudflare
+secretGenerator:
+  - name: tunnel-credentials
+    literals:
+      - credentials.json=${cloudflare_credentials.json}
