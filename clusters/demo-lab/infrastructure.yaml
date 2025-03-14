@@ -1,18 +1,20 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-secrets
+  name: infrastructure
   namespace: flux-system
 spec:
   interval: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: REPLACEME
+  dependsOn:
+    - name: secrets
+  path: ./infrastructure
   prune: true
   timeout: 5m
   wait: true
-  decryption:
-    provider: sops
-    secretRef:
-      name: flux-sops-agekey
+  postBuild:
+    substitute:
+      CLOUDFLARE_TUNNEL_NAME: "demo-lab"
+      CLOUDFLARE_TUNNEL_ID: "tunnel-id"
