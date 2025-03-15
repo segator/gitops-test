@@ -19,6 +19,5 @@ patches:
           remediation:
             retries: 3
       - op: add
-        path: /spec/chart/spec/sourceRef
-        value:
-          namespace: flux-system
+        path: /spec/chart/spec/sourceRef/namespace
+        value: flux-system
