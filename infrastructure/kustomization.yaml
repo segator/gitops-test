@@ -15,10 +15,10 @@ patches:
         value: 30m
       - op: add
         path: /spec/install
-        value: |-
-          install:
-            remediation:
-              retries: 3
+        value:
+          remediation:
+            retries: 3
       - op: add
-        path: /spec/sourceRef/namespace
-        value: flux-system
+        path: /spec/sourceRef
+        value:
+          namespace: flux-system
