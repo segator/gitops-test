@@ -12,8 +12,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: cloudflare
-        namespace: flux-system
-  interval: 1h
   install:
     createNamespace: true
     remediation:
@@ -28,8 +26,3 @@ spec:
           service: "https://ingress-nginx-controller.kube-system.svc.cluster.local:443"
           originRequest:
             noTLSVerify: true
-    resources:
-      requests:
-        cpu: "100m"
-        memory: "128Mi"
-    replicaCount: 1

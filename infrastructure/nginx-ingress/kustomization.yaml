@@ -4,4 +4,3 @@ namespace: ingress-system
 resources:
 - namespace.yaml
 - release.yaml
-- repository.yaml

@@ -1,7 +1,24 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - repo
   - cloudflare
   - external-dns
   - metrics-server
   - nginx-ingress
+patches:
+  - target:
+        kind: HelmRelease
+    patch: |-
+      - op: replace
+        path: /spec/interval
+        value: 30m
+      - op: add
+        path: /spec/install
+        value: |-
+          install:
+            remediation:
+              retries: 3
+      - op: add
+        path: /spec/sourceRef/namespace
+        value: flux-system
