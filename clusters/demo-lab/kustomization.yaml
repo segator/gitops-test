@@ -11,3 +11,8 @@ configMapGenerator:
     namespace: flux-system
     envs:
       - configs/cluster-config.env
+secretGenerator:
+  - name: cluster-secrets
+    namespace: flux-system
+    envs:
+      - secrets/cloudflare.env

@@ -3,8 +3,8 @@ keys:
   - &user_aymerici age1qw932v4nt3muyy7lf6f2k68627huql68duzqvq7qq0tljr37cp6sjq07f9
 
 creation_rules:
-- path_regex: clusters/demo-lab/secrets/.*-secrets.yaml
-  encrypted_regex: ^(data|stringData|key|token|secretboxEncryptionSecret|secret)$
+- path_regex: clusters/demo-lab/secrets/*
+
   key_groups:
   - age:
     - *user_aymerici
