@@ -6,11 +6,9 @@ resources:
   - helm-ingress-nginx.yaml
   - helm-metrics-server.yaml
 namespace: flux-system
-
 patches:
   - target:
       kind: HelmRepository
-      namespace: flux-system
     patch: |-
       - op: replace
         path: /spec/interval
