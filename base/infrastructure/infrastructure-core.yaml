@@ -12,7 +12,6 @@ spec:
     - name: flux-system
     - name: infrastructure-repo
   path: ./infrastructure/app
-  targetNamespace: flux-system
   patches:
     - target:
         kind: HelmRelease
