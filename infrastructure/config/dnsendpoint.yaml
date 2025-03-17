@@ -4,6 +4,6 @@ metadata:
   name: nginx-tunnel-endpoint
 spec:
   endpoints:
-    - dnsName: \*.${DOMAIN}
+    - dnsName: "*.${DOMAIN}"
       recordType: CNAME
       targets: ["${CLOUDFLARE_TUNNEL_ID}.cfargotunnel.com"]
