@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: external-dns
-      version: "1.13.1"
+      version: "1.15.2"
       sourceRef:
         kind: HelmRepository
         name: external-dns
@@ -16,6 +16,7 @@ spec:
   values:
     sources:
       - ingress
+      - crd
     policy: sync
     domainFilters: ["${DOMAIN}"]
     provider:
