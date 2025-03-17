@@ -4,7 +4,6 @@ resources:
 - namespace.yaml
 - tunnel-secret.yaml
 - release.yaml
-- dnsendpoint.yaml
 namespace: cloudflare
 generatorOptions:
   disableNameSuffixHash: true
