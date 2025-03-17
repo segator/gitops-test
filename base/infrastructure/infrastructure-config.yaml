@@ -15,4 +15,3 @@ spec:
   prune: true
   timeout: 5m
   wait: true
-
