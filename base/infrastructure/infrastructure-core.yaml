@@ -26,6 +26,10 @@ spec:
             remediation:
               retries: 3
         - op: add
+          path: /spec/driftDetection
+          value:
+            mode: enabled
+        - op: add
           path: /spec/upgrade
           value:
             cleanupOnFail: true

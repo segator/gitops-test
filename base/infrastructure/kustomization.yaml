@@ -10,6 +10,9 @@ patches:
       group: kustomize.toolkit.fluxcd.io
     patch: |-
       - op: add
+        path: /spec/retryInterval
+        value: 5s
+      - op: add
         path: /spec/postBuild
         value:
           substituteFrom:

@@ -13,6 +13,7 @@ spec:
         kind: HelmRepository
         name: cloudflare
   interval: 1h
+
   values:
     cloudflare:
       tunnelName: ${CLOUDFLARE_TUNNEL_NAME}

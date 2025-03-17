@@ -7,7 +7,3 @@ resources:
 namespace: cloudflare
 generatorOptions:
   disableNameSuffixHash: true
-#secretGenerator:
-#  - name: tunnel-credentials
-#    literals:
-#      - credentials.json=${cloudflare_credentials_json}
