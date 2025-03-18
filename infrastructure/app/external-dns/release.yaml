@@ -18,7 +18,7 @@ spec:
       - ingress
       - crd
     policy: sync
-    domainFilters: ["${DOMAIN}"]
+    #domainFilters: ["${DOMAIN}"]
     logLevel: debug
     provider:
       name: cloudflare
