@@ -15,3 +15,4 @@ spec:
           metadata:
             annotations:
               +(external-dns.alpha.kubernetes.io/target): "${CLOUDFLARE_TUNNEL_ID}.cfargotunnel.com"
+              +(external-dns.alpha.kubernetes.io/cloudflare-proxied): "true"

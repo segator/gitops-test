@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - ../../base/flux-system
   - ../../base/infrastructure
+  - ../../base/app
 patches:
   - target:
       kind: Kustomization
@@ -12,6 +13,15 @@ patches:
       - op: replace
         path: /spec/path
         value: ./clusters/demo-lab
+  - target:
+      kind: Kustomization
+      name: applications
+      namespace: flux-system
+    patch: |-
+      - op: replace
+        path: /spec/path
+        value: ./clusters/demo-lab/apps
+
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:
