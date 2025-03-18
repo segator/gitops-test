@@ -19,6 +19,7 @@ spec:
       - crd
     policy: sync
     domainFilters: ["${DOMAIN}"]
+    logLevel: debug
     provider:
       name: cloudflare
     env:
@@ -31,4 +32,3 @@ spec:
       - --cloudflare-dns-records-per-page=1000
       - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
       - --crd-source-kind=DNSEndpoint
-      - --log-level=debug
