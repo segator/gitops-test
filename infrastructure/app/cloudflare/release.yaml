@@ -15,7 +15,6 @@ spec:
   interval: 1h
 
   values:
-    image.tag: "2025.2.1"
     cloudflare:
       tunnelName: ${CLOUDFLARE_TUNNEL_NAME}
       tunnelId: ${CLOUDFLARE_TUNNEL_ID}
