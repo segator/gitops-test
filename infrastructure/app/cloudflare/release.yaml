@@ -21,6 +21,6 @@ spec:
       secretName: "tunnel-credentials"
       ingress:
         - hostname: "*.${DOMAIN}"
-          service: "https://ingress-nginx-controller.ingress-system.svc.cluster.local:443"
-          originRequest:
-            noTLSVerify: true
+          service: "http://ingress-nginx-controller.ingress-system.svc.cluster.local:80"
+#          originRequest:
+#            noTLSVerify: true
