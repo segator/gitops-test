@@ -48,3 +48,4 @@ spec:
       vault_root_token_secret: openbao-root-token
       # secret for storing vault unlock keys
       vault_keys_secret: openbao-keys
+      vault_label_selector: app.kubernetes.io/instance=openbao,component=server
