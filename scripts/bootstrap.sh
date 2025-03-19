@@ -30,14 +30,14 @@ fi
 
 # Bootstrap Flux
 echo "Bootstrapping Flux on cluster: $CLUSTER_NAME"
-flux bootstrap github \
-  --owner=$GITHUB_USER \
-  --repository=$REPO_NAME \
-  --branch=main \
-  --path=./clusters/$CLUSTER_NAME \
-  --personal \
-  --components-extra=image-reflector-controller,image-automation-controller
-
+#flux bootstrap github \
+#  --owner=$GITHUB_USER \
+#  --repository=$REPO_NAME \
+#  --branch=main \
+#  --path=./clusters/$CLUSTER_NAME \
+#  --personal \
+#  --components-extra=image-reflector-controller,image-automation-controller
+kubectl apply -k ./base/flux-system/
 # Create cluster-specific secrets
 echo "Creating necessary secrets..."
 

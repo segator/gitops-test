@@ -19,7 +19,7 @@ spec:
       - crd
     policy: sync
 
-    domainFilters: ["segator.es"]
+    domainFilters: ["${DOMAIN}"]
     logLevel: debug
     provider:
       name: cloudflare
