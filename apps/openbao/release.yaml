@@ -35,7 +35,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: pytoshka-vault-autounseal
-        namespace: flux-charts
       interval: 15m
   values:
     settings:
