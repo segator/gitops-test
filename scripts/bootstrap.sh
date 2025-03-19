@@ -37,28 +37,9 @@ echo "Bootstrapping Flux on cluster: $CLUSTER_NAME"
 #  --path=./clusters/$CLUSTER_NAME \
 #  --personal \
 #  --components-extra=image-reflector-controller,image-automation-controller
-kubectl apply -k ./base/flux-system/
-# Create cluster-specific secrets
-echo "Creating necessary secrets..."
+kubectl apply -k ./clusters/$CLUSTER_NAME/flux-system
 
-# Cloudflare Tunnel Credentials (example)
-read -p "Enter Cloudflare Tunnel ID: " TUNNEL_ID
-read -p "Enter Cloudflare Tunnel Name: " TUNNEL_NAME
-read -p "Enter Domain: " DOMAIN
-read -sp "Enter Cloudflare Tunnel Token: " TUNNEL_TOKEN
-echo
 
-# Create the namespace if it doesn't exist
-kubectl create namespace cloudflare --dry-run=client -o yaml | kubectl apply -f -
-
-# Create the secret
-kubectl create secret generic tunnel-credentials \
-  --namespace=cloudflare \
-  --from-literal=tunnelID=$TUNNEL_ID \
-  --from-literal=tunnelName=$TUNNEL_NAME \
-  --from-literal=tunnelToken=$TUNNEL_TOKEN \
-  --from-literal=domain=$DOMAIN \
-  --dry-run=client -o yaml | kubectl apply -f -
 
 echo "Flux bootstrap complete. Cluster $CLUSTER_NAME is now managed by Flux."
 echo "Please commit and push any changes to your repository."
