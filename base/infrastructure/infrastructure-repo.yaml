@@ -10,7 +10,7 @@ spec:
     name: flux-system
   dependsOn:
     - name: flux-system
-  path: ./infrastructure/app
+  path: ./infrastructure/repo
   targetNamespace: flux-system
   patches:
     - target:
